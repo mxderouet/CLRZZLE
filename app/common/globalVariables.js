@@ -13,7 +13,10 @@ export const gameStartAudio = new Audio('/app/assets/sounds/game-start.wav');
 
 export const colors = [ 'blue', 'red', 'yellow', 'green', '#8A2BE2', '#00FFFF' ]
 
-export const symbols = ['♠', '♡', '♢', '♣', '♤', '♥', '♦', '♧', '♩', '♫', '♬', '♭', '♚', '♛', '♜', '♝', '♞', '♟', '⚀', '⚁', '⚂', '⚃', '⚄', '⚅' ]
+export const symbols = ['♠', '♡', '♢', '♣', '♤', '♥', '♦', '♧', '♩', '♫', '♬', '♚', '♛', '♜', '♝', '♞', '♟', '⚀', '⚁', '⚂', '⚃', '⚄', '⚅' ]
+
+export const skull = '&#x1F480;';
+export const heart = '&#x2665;';
 
 export let playerData = {
     score: 0,
@@ -21,7 +24,7 @@ export let playerData = {
 }
 
 export let gameData = {
-    timer: 10000,
+    timer: 1000,
     pauseTimer: false,
     hasEnded: false
 }

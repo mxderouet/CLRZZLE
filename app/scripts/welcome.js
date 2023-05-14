@@ -3,6 +3,7 @@ import { gameData, matcherDiv, playerData, gameStartAudio } from "../common/glob
 
 const startContainer = document.createElement("div");
 const welcomeMessage = document.createElement("div");
+const rulesDiv = document.createElement("div");
 const playButton = document.createElement("button");
 
 function loadGame() {
@@ -20,6 +21,9 @@ export const welcomeScreen = () => {
 
     welcomeMessage.id = "welcome_message";
     welcomeMessage.innerText = "WELCOME TO CLRZZLE !";
+
+    rulesDiv.id = "rules"
+    rulesDiv.innerText = "USE ARROWS OR SWIPE TO MATCH !"
     
     playButton.id = "play_button";
     playButton.innerText = "PLAY";
@@ -27,5 +31,6 @@ export const welcomeScreen = () => {
 
     startContainer.appendChild(welcomeMessage);
     startContainer.appendChild(playButton);
+    startContainer.appendChild(rulesDiv);
     document.body.appendChild(startContainer);
 }

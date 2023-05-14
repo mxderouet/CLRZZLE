@@ -3,43 +3,48 @@
 // - high scores in local storage
 // - sound for live lost
 // - score granularity
-// - swipe 
+// - test swipe 
 // - do not use z-index 
 // - 10 good matches =  +1 life or 10 s bonus
-// - medals for 1/2/3
 
 import { timerDiv, gameData, playerData, isGameOver } from "../common/globalVariables.js"
 import { startGameOverScreen } from "./game-over.js"
 import { startGameOver, endGameOver } from "../common/utils.js"
 import { welcomeScreen } from "./welcome.js"
 
-let pace = 10;
 let intervalId;
+let startTime;
 
-export function endGame () {
+export function endGame() {
   clearInterval(intervalId);
   gameData.pauseTimer = true;
-  if (!gameData.hasEnded) { // only call endGame() if it hasn't been called before
+  if (!gameData.hasEnded) {
     startGameOverScreen();
     startGameOver();
   }
-} 
+}
 
 export const start = () => {
   if (isGameOver()) { return }
   if (gameData.pauseTimer === true ) { return }
-  endGameOver();
+
+  gameData.timer = 10000; // Set the timer to 10 seconds
+  startTime = Date.now(); // Record the start time
+
   intervalId = setInterval(() => {
-      timerDiv.innerHTML = (gameData.timer / 1000).toFixed(3) + ' S';
-      if (gameData.timer <= 0) {
-        endGame(intervalId)
-      } else {
-        gameData.timer -= pace;
-        if (playerData.lives <= 0) {
-          endGame(intervalId)
-        }
+    const elapsedTime = Date.now() - startTime; // Calculate elapsed time
+    const remainingTime = gameData.timer - elapsedTime; // Calculate remaining time
+
+    if (remainingTime <= 0) {
+      endGame()
+    } else {
+      timerDiv.innerHTML = (remainingTime / 1000).toFixed(3) + ' S';
+      if (playerData.lives <= 0) {
+        endGame()
       }
-  }, pace);
+    }
+  }, 10); // Run the interval every 10 milliseconds
 };
+
 
 welcomeScreen();

@@ -1,4 +1,4 @@
-import { topDiv, bottomDiv, rightDiv, leftDiv, matcherDiv, colors, symbols, scoreTab, lifeTab, gameData, playerData, isGameOver } from "../common/globalVariables.js"
+import { topDiv, bottomDiv, rightDiv, leftDiv, matcherDiv, colors, symbols, scoreTab, gameData, playerData, isGameOver } from "../common/globalVariables.js"
 import { shuffle, startGameOver } from "../common/utils.js";
 import { loadAssets } from "./load-assets.js";
 import { endGame } from "./index.js"
@@ -8,10 +8,9 @@ export function updateScore (guessedColor, matcherColor) {
     const correctAnswer = guessedColor === matcherColor;
     if (correctAnswer) {
     playerData.score += 1000;
-    gameData.timer = 5000;
     } else {
-    playerData.score -= 500;
-    playerData.lives -= 1;
+      (playerData.score ===  0) ?playerData.score = 0 : playerData.score -= 500;
+      playerData.lives -= 1;
     } 
     scoreTab.innerText = `SCORE: ${playerData.score}`;
     if (isGameOver()) { 
@@ -32,7 +31,11 @@ function resetMatcherDivPosition() {
 }
 
 export function checkInputs(matcherColor) {
-  const matcherDiv = document.getElementById('matcher');
+  checkKeyboardInputs(matcherColor)
+  checkSwipeInputs(matcherColor)
+}
+ 
+function checkKeyboardInputs(matcherColor) {
   document.onkeydown = function (e) {
     let guessedColor = 'white';
     switch (e.keyCode) {
@@ -71,6 +74,49 @@ export function checkInputs(matcherColor) {
     }
   };
 }
+
+function checkSwipeInputs(matcherColor) {
+  const hammertime = new Hammer(document.body);
+  hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+  hammertime.on('swipe', function(ev) {
+    let guessedColor = 'white';
+    switch (ev.direction) {
+      case Hammer.DIRECTION_LEFT:
+        if (isGameOver()) { return }
+        console.log('left swipe');
+        guessedColor = document.getElementById('left').className;
+        updateScore(guessedColor, matcherColor);
+        matcherDiv.style.transform = 'translate(-200%, -50%)';
+        resetMatcherDivPosition()
+        break;
+      case Hammer.DIRECTION_UP:
+        if (isGameOver()) { return }
+        console.log('up swipe');
+        guessedColor = document.getElementById('top').className;
+        updateScore(guessedColor, matcherColor);
+        matcherDiv.style.transform = 'translate(-50%, -250%)';
+        resetMatcherDivPosition()
+        break;
+      case Hammer.DIRECTION_RIGHT:
+        if (isGameOver()) { return }
+        console.log('right swipe');
+        guessedColor = document.getElementById('right').className;
+        updateScore(guessedColor, matcherColor);
+        matcherDiv.style.transform = 'translate(100%, -50%)';
+        resetMatcherDivPosition()
+        break;
+      case Hammer.DIRECTION_DOWN:
+        if (isGameOver()) { return }
+        console.log('down swipe');
+        guessedColor = document.getElementById('bottom').className;
+        updateScore(guessedColor, matcherColor);
+        matcherDiv.style.transform = 'translate(-50%, 150%)';
+        resetMatcherDivPosition()
+        break;
+    }
+  });
+}
+
 
 function setupTile (currentRoundType, tileIndex, tile) {
   currentRoundType === 'color' ? tile.style = `background-color:${tileIndex}` : tile.innerText = tileIndex

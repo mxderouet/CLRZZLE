@@ -21,17 +21,17 @@ export function startGameOverScreen() {
     scores.innerHTML = `YOUR SCORE: ${playerData.score}`;
     replayButton.innerHTML = "PLAY AGAIN";
     highScoresDiv.innerHTML = `
-      HIGH SCORES
+      ### HIGH SCORES ###
       <br>
-      #1: ${highScores[0] ?? "0"} point(s)
+      🥇 ${highScores[0] ?? "0"} points
       <br>
-      #2: ${highScores[1] ?? "0"} point(s)
+      🥈 ${highScores[1] ?? "0"} points
       <br>
-      #3: ${highScores[2] ?? "0"} point(s)
+      🥉 ${highScores[2] ?? "0"} points
       <br>
-      #4: ${highScores[3] ?? "0"} point(s)
+      #4: ${highScores[3] ?? "0"} points
       <br>
-      #5: ${highScores[4] ?? "0"} point(s)
+      #5: ${highScores[4] ?? "0"} points
       <br>
     `;
     endContainer.style.zIndex = 1000;

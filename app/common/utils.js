@@ -10,7 +10,7 @@ export function randomColor (colors) {
 }
 
 export function randomSymbol (symbols) {
-    const symbolIndex = randomInteger(0,23)
+    const symbolIndex = randomInteger(0,22)
     return(symbols[`${symbolIndex}`])
 }
 
