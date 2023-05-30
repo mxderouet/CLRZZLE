@@ -1,0 +1,195 @@
+body {
+    font-family: Helvetica;
+    height: 100%;
+    overflow: hidden;
+}
+
+h1 {
+    text-align: center;
+}
+
+.container {
+    background-color: lightgreen;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+}
+
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-30px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
+
+#game_logo {
+    display: flex;
+    justify-content: center;
+    margin: 4vh;
+}
+
+#game_logo img {
+    width: 8vh;
+    animation: float 4s ease-in-out infinite;
+}
+
+#top {
+    text-align: center;
+    font-size: 10vh;
+    width: 100%;
+    height: 25%;
+}
+
+#right {
+    display: flex;
+    align-items: center;
+    font-size: 10vh;
+    width: 25%;
+    height: 50%;
+}
+
+#bottom {
+    text-align: center;
+    font-size: 10vh;
+    width: 100%;
+    height: 25%;
+}
+
+#left {
+    display: flex;
+    align-items: center;
+    font-size: 10vh;
+    width: 25%;
+    height: 50%;
+}
+
+#matcher {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10vh;
+    width: 10vh;
+    height: 10vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.5s ease-out;
+}
+
+#matcher img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#score {
+    color: white;
+    text-shadow: 3px 3px black;
+    position: absolute;
+    font-size: 25px;
+    top: 1vh;
+    right: 2vh;
+}
+
+#life {
+    color: white;
+    text-shadow: 3px 3px black;
+    position: absolute;
+    font-size: 25px;
+    top: 1vh;
+    left: 2vh;
+}
+
+#timer {
+    color: white;
+    text-shadow: 3px 3px black;
+    position: absolute;
+    font-size: 25px;
+    bottom: 0.5vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#start_screen {
+    background-color: lightgreen;
+    color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 5vh;
+}
+
+#welcome_message {
+    margin: 0 auto;
+    text-align: center;
+    transform: translatey(0px);
+}
+
+#play_button {
+    margin: 2vh 4vh;
+    padding: 2vh 4vh;
+    font-family: Helvetica;
+    background-color: lightgreen;
+    color: black;
+}
+
+#end_screen {
+    background-color: black;
+    color: red;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 5vh;
+}
+
+#game_over {
+    font-family: fantasy;
+    margin: 2vh;
+}
+
+#end_scores {
+    margin: 2vh;
+    font-size: 4vh;
+    font-family: Helvetica;
+    text-align: center;
+}
+
+#high_score {
+    margin-top: 8vh;
+    font-size: 3vh;
+    text-align: center;
+}
+
+#replay_button {
+    margin: 2vh;
+    padding: 2vh;
+    font-family: Helvetica;
+    color: red;
+    background-color: black;
+}
+
+#rules {
+    text-align: center;
+    color: black;
+    font-size: 2vh;
+}
