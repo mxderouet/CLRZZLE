@@ -1,7 +1,8 @@
-import { loadAssets } from "./load-assets.js"
+import { loadAssets } from "./loadAssets.js"
 import { gameData, matcherDiv, playerData, gameStartAudio } from "../common/globalVariables.js"
 
 const startContainer = document.createElement("div");
+const gameLogo = document.createElement("div");
 const welcomeMessage = document.createElement("div");
 const rulesDiv = document.createElement("div");
 const playButton = document.createElement("button");
@@ -19,16 +20,20 @@ export const welcomeScreen = () => {
     startContainer.style.zIndex = 1000;
     startContainer.id = "start_screen";
 
+    gameLogo.id = "game_logo";
+    gameLogo.innerHTML = "<img src=./app/assets/images/puzzle.png>"
+
     welcomeMessage.id = "welcome_message";
     welcomeMessage.innerText = "WELCOME TO CLRZZLE !";
 
     rulesDiv.id = "rules"
-    rulesDiv.innerText = "USE ARROWS OR SWIPE TO MATCH !"
+    rulesDiv.innerText = "USE ARROWS OR SWIPE TO MATCH"
     
     playButton.id = "play_button";
     playButton.innerText = "PLAY";
     playButton.addEventListener("click", () => loadGame());
 
+    startContainer.appendChild(gameLogo);
     startContainer.appendChild(welcomeMessage);
     startContainer.appendChild(playButton);
     startContainer.appendChild(rulesDiv);

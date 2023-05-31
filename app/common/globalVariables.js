@@ -1,3 +1,6 @@
+import { randomInteger, arrayLength } from "./utils.js"
+import { symbolPool} from "./pieces.js"
+
 export const topDiv = document.getElementById("top")
 export const bottomDiv = document.getElementById("bottom")
 export const rightDiv = document.getElementById("right")
@@ -10,10 +13,17 @@ export const lifeTab = document.getElementById("life")
 export const gameDivs = [ topDiv, bottomDiv, rightDiv, leftDiv, matcherDiv ]
 
 export const gameStartAudio = new Audio('/app/assets/sounds/game-start.wav');
+export const liveLostAudio = new Audio('/app/assets/sounds/live-lost.wav');
+export const roundWonAudio = new Audio('/app/assets/sounds/round-won.wav');
 
-export const colors = [ 'blue', 'red', 'yellow', 'green', '#8A2BE2', '#00FFFF' ]
+export function pickSymbols() {
+    return symbolPool[randomInteger(0, arrayLength(symbolPool))]
+}
 
-export const symbols = ['♠', '♡', '♢', '♣', '♤', '♥', '♦', '♧', '♩', '♫', '♬', '♚', '♛', '♜', '♝', '♞', '♟', '⚀', '⚁', '⚂', '⚃', '⚄', '⚅' ]
+// console.log('ICI allSymbols', allSymbols)
+// console.log('ICI symbolPool', symbolPool)
+// console.log('ICI symbolPool', symbolPool)
+// console.log('ICI symbolsLength', arrayLength(symbols))
 
 export const skull = '&#x1F480;';
 export const heart = '&#x2665;';

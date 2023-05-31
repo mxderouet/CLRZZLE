@@ -1,14 +1,14 @@
 // @TO-DO:
-
-// - high scores in local storage
-// - sound for live lost
 // - score granularity
 // - test swipe 
 // - do not use z-index 
 // - 10 good matches =  +1 life or 10 s bonus
+// - 3 first letters of name in the highScore
+// - add trap for color blinds
+// - add a gauge
 
 import { timerDiv, gameData, playerData, isGameOver } from "../common/globalVariables.js"
-import { startGameOverScreen } from "./game-over.js"
+import { startGameOverScreen } from "./gameOver.js"
 import { startGameOver, endGameOver } from "../common/utils.js"
 import { welcomeScreen } from "./welcome.js"
 

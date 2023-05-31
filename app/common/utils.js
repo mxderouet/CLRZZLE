@@ -2,15 +2,19 @@ import { gameData } from "./globalVariables.js"
 
 export function randomInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+}
+
+export function arrayLength(array) {
+    return array.length - 1
+}
 
 export function randomColor (colors) {
-    const colorIndex = randomInteger(0,5)
+    const colorIndex = randomInteger(0,arrayLength(colors))
     return(colors[`${colorIndex}`])
 }
 
 export function randomSymbol (symbols) {
-    const symbolIndex = randomInteger(0,22)
+    const symbolIndex = randomInteger(0,arrayLength(symbols))
     return(symbols[`${symbolIndex}`])
 }
 

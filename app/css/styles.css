@@ -17,7 +17,31 @@ h1 {
     height: 100vh;
 }
 
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-30px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
+
+#game_logo {
+    display: flex;
+    justify-content: center;
+    margin: 4vh;
+}
+
+#game_logo img {
+    width: 8vh;
+    animation: float 4s ease-in-out infinite;
+}
+
 #top {
+    z-index: 3;
     text-align: center;
     font-size: 10vh;
     width: 100%;
@@ -25,6 +49,7 @@ h1 {
 }
 
 #right {
+    z-index: 3;
     display: flex;
     align-items: center;
     font-size: 10vh;
@@ -33,6 +58,7 @@ h1 {
 }
 
 #bottom {
+    z-index: 3;
     text-align: center;
     font-size: 10vh;
     width: 100%;
@@ -40,6 +66,7 @@ h1 {
 }
 
 #left {
+    z-index: 3;
     display: flex;
     align-items: center;
     font-size: 10vh;
@@ -48,17 +75,19 @@ h1 {
 }
 
 #matcher {
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 10vh;
     width: 10vh;
     height: 10vh;
+    border-radius: 4px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    transition: transform 0.5s ease-out;
+    transition: transform 0.3s ease-out;
 }
 
 #matcher img {
@@ -68,6 +97,7 @@ h1 {
 }
 
 #score {
+    z-index: 3;
     color: white;
     text-shadow: 3px 3px black;
     position: absolute;
@@ -77,6 +107,7 @@ h1 {
 }
 
 #life {
+    z-index: 3;
     color: white;
     text-shadow: 3px 3px black;
     position: absolute;
@@ -86,6 +117,7 @@ h1 {
 }
 
 #timer {
+    z-index: 3;
     color: white;
     text-shadow: 3px 3px black;
     position: absolute;
@@ -113,11 +145,13 @@ h1 {
 #welcome_message {
     margin: 0 auto;
     text-align: center;
+    transform: translatey(0px);
 }
 
 #play_button {
     margin: 2vh 4vh;
     padding: 2vh 4vh;
+    border-radius: 4px;
     font-family: Helvetica;
     background-color: lightgreen;
     color: black;
@@ -147,6 +181,7 @@ h1 {
     margin: 2vh;
     font-size: 4vh;
     font-family: Helvetica;
+    text-align: center;
 }
 
 #high_score {
@@ -161,6 +196,7 @@ h1 {
     font-family: Helvetica;
     color: red;
     background-color: black;
+    border-radius: 4px;
 }
 
 #rules {
@@ -168,3 +204,9 @@ h1 {
     color: black;
     font-size: 2vh;
 }
+
+.color-box {
+    width: 50%; /* Adjust the width to your desired value */
+    height: 100px;
+    display: inline-block;
+  }
