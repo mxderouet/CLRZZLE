@@ -68,7 +68,7 @@ export function checkInputs(matcherColor) {
     let deltaX = endX - startX;
     let deltaY = endY - startY;
 
-    let swipeThreshold = 200; // Adjust this threshold value as needed
+    let swipeThreshold = 100; // Adjust this threshold value as needed
 
     if (Math.abs(deltaX) > swipeThreshold || Math.abs(deltaY) > swipeThreshold) {
       swipeHandled = true;
