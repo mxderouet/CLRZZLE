@@ -15,8 +15,8 @@ export function startGameOverScreen() {
     scores.id = "end_scores";
     replayButton.id = "replay_button";
     highScoresDiv.id = "high_score";
-    (highScores === null) ? highScores = [].push(`${playerData.score}`) : highScores.push(`${playerData.score}`);
-    highScores.sort((a, b) => b - a);
+    (highScores === null) ? highScores = [ playerData.score ] : highScores.push(`${playerData.score}`);
+    if (highScores.length > 1) { highScores.sort((a, b) => b - a);
     localStorage.setItem("highScores", JSON.stringify(highScores));
     console.log('highScores:', highScores)
     banner.innerHTML = "GAME OVER";
