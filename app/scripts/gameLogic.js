@@ -10,30 +10,99 @@ function resetMatcherDivPosition() {
   }, timeOut);
 }
 
+export function checkSwipeInputs(matcherColor, deltaX, deltaY) {
+  let guessedColor = 'white'
+  if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    if (deltaX > 0) {
+      // Right swipe
+      console.log('right');
+      guessedColor = document.getElementById('right').className;
+      updateScore(guessedColor, matcherColor);
+      matcherDiv.style.transform = 'translate(100%, -50%)';
+      resetMatcherDivPosition();
+    } else {
+      // Left swipe
+      console.log('left');
+      guessedColor = document.getElementById('left').className;
+      updateScore(guessedColor, matcherColor);
+      matcherDiv.style.transform = 'translate(-200%, -50%)';
+      resetMatcherDivPosition();
+    }
+  } else {
+    if (deltaY > 0) {
+      // Down swipe
+      console.log('down');
+      guessedColor = document.getElementById('bottom').className;
+      updateScore(guessedColor, matcherColor);
+      matcherDiv.style.transform = 'translate(-50%, 150%)';
+      resetMatcherDivPosition();
+    } else {
+      // Up swipe
+      console.log('up');
+      guessedColor = document.getElementById('top').className;
+      updateScore(guessedColor, matcherColor);
+      matcherDiv.style.transform = 'translate(-50%, -250%)';
+      resetMatcherDivPosition();
+    }
+  }
+}
+
 export function checkInputs(matcherColor) {
   // Keyboard inputs event listener
   document.onkeydown = function (keyboardInput) {
-    checkKeyboardInputs(matcherColor, keyboardInput)
-  }
+    checkKeyboardInputs(matcherColor, keyboardInput);
+  };
+
   // Swipe gesture event listener
+  let startX, startY;
+  let swipeHandled = false;
+
+  function touchEndHandler(e) {
+    if (!startX || !startY || swipeHandled) {
+      return;
+    }
+
+    let endX = e.changedTouches[0].clientX;
+    let endY = e.changedTouches[0].clientY;
+
+    let deltaX = endX - startX;
+    let deltaY = endY - startY;
+
+    let swipeThreshold = 200; // Adjust this threshold value as needed
+
+    if (Math.abs(deltaX) > swipeThreshold || Math.abs(deltaY) > swipeThreshold) {
+      swipeHandled = true;
+      checkSwipeInputs(matcherColor, deltaX, deltaY);
+    }
+
+    startX = null;
+    startY = null;
+  }
+
   document.body.addEventListener('touchstart', function(e) {
-    let startX = e.touches[0].clientX;
-    let startY = e.touches[0].clientY;
-
-    document.body.addEventListener('touchend', function(e) {
-      let endX = e.changedTouches[0].clientX;
-      let endY = e.changedTouches[0].clientY;
-
-      let deltaX = endX - startX;
-      let deltaY = endY - startY;
-
-      let swipeThreshold = 50; // Adjust this threshold value as needed
-
-      if (Math.abs(deltaX) > swipeThreshold || Math.abs(deltaY) > swipeThreshold) {
-        checkSwipeInputs(matcherColor);
-      }
-    }, { once: true }); // Ensure the event listener is called only once
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
   });
+
+  document.body.addEventListener('touchend', touchEndHandler);
+
+  // Cleanup event listeners
+  function cleanupListeners() {
+    document.body.removeEventListener('touchstart', touchStartHandler);
+    document.body.removeEventListener('touchend', touchEndHandler);
+  }
+
+  // Cleanup event listeners after the game is over
+  function gameoverHandler() {
+    cleanupListeners();
+    // Add any additional game over logic here
+  }
+
+  // Add a game over event listener (assuming there's a game over event)
+  document.addEventListener('gameover', gameoverHandler);
+
+  // Cleanup event listeners on page unload
+  window.addEventListener('beforeunload', cleanupListeners);
 }
  
 function checkKeyboardInputs(matcherColor, keyboardInput) {
@@ -74,31 +143,6 @@ function checkKeyboardInputs(matcherColor, keyboardInput) {
   }
 }
 
-export function checkSwipeInputs(matcherColor) {
-  const swipeContainer = document.body;
-  debugger
-  const swiper = new Swiper(swipeContainer, {
-    direction: 'horizontal',
-    threshold: 10, // Adjust this threshold value as needed
-    onTouchEnd: function(swiper) {
-      if (swiper.direction === 'left') {
-        if (isGameOver()) { return; }
-        console.log('left swipe');
-        const guessedColor = document.getElementById('left').className;
-        updateScore(guessedColor, matcherColor);
-        matcherDiv.style.transform = 'translate(-200%, -50%)';
-        resetMatcherDivPosition();
-      } else if (swiper.direction === 'right') {
-        if (isGameOver()) { return; }
-        console.log('right swipe');
-        const guessedColor = document.getElementById('right').className;
-        updateScore(guessedColor, matcherColor);
-        matcherDiv.style.transform = 'translate(100%, -50%)';
-        resetMatcherDivPosition();
-      }
-    },
-  });
-}
 
 function setupTile (currentRoundType, tileIndex, tile) {
   currentRoundType === 'color' ? tile.style = `background-color:${tileIndex}` : tile.innerText = tileIndex
@@ -112,7 +156,6 @@ function setupWinningTile (currentRoundType, color, tile) {
 
 export function updateColors(currentRoundType, matcherTileIndex, matchingContent) {
   const tiles = [topDiv, bottomDiv, leftDiv, rightDiv];
-  console.log('ICI matchingContent', matchingContent)
   const remainingPieces = currentRoundType === 'color' ? colors.slice() : matchingContent.elements.slice();
   remainingPieces.splice(remainingPieces.indexOf(matchingContent.matcher), 1);
   shuffle(remainingPieces);

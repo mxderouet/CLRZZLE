@@ -15,15 +15,11 @@ export const gameDivs = [ topDiv, bottomDiv, rightDiv, leftDiv, matcherDiv ]
 export const gameStartAudio = new Audio('/app/assets/sounds/game-start.wav');
 export const liveLostAudio = new Audio('/app/assets/sounds/live-lost.wav');
 export const roundWonAudio = new Audio('/app/assets/sounds/round-won.wav');
+export const mainThemeAudio = new Audio('/app/assets/sounds/main-theme.wav');
 
 export function pickSymbols() {
     return symbolPool[randomInteger(0, arrayLength(symbolPool))]
 }
-
-// console.log('ICI allSymbols', allSymbols)
-// console.log('ICI symbolPool', symbolPool)
-// console.log('ICI symbolPool', symbolPool)
-// console.log('ICI symbolsLength', arrayLength(symbols))
 
 export const skull = '&#x1F480;';
 export const heart = '&#x2665;';

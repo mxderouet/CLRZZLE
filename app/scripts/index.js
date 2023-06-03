@@ -1,6 +1,5 @@
 // @TO-DO:
 // - score granularity
-// - test swipe 
 // - do not use z-index 
 // - 10 good matches =  +1 life or 10 s bonus
 // - 3 first letters of name in the highScore

@@ -1,5 +1,5 @@
 import { loadAssets } from "./loadAssets.js"
-import { gameData, matcherDiv, playerData, gameStartAudio } from "../common/globalVariables.js"
+import { gameData, matcherDiv, playerData, gameStartAudio, mainThemeAudio } from "../common/globalVariables.js"
 
 const startContainer = document.createElement("div");
 const gameLogo = document.createElement("div");
@@ -13,9 +13,20 @@ function loadGame() {
     loadAssets(matcherDiv, playerData.score, playerData.lives);
 }
 
+function playMainTheme () {
+    mainThemeAudio.play();
+}
+
+function handleThemeMusic () {
+    document.body.addEventListener("mousemove", playMainTheme)
+    document.getElementById("play_button").addEventListener("click", function () {
+        mainThemeAudio.pause();
+        document.body.removeEventListener("mousemove", playMainTheme)
+    })
+}
+
 export const welcomeScreen = () => {
     gameData.pauseTimer = true;
-    console.log('welcome');
 
     startContainer.style.zIndex = 1000;
     startContainer.id = "start_screen";
@@ -38,4 +49,6 @@ export const welcomeScreen = () => {
     startContainer.appendChild(playButton);
     startContainer.appendChild(rulesDiv);
     document.body.appendChild(startContainer);
+    
+    handleThemeMusic();
 }
