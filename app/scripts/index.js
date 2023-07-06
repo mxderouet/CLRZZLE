@@ -1,8 +1,7 @@
 // @TO-DO:
 // - score granularity
 // - do not use z-index 
-// - 10 good matches =  +1 life or 10 s bonus
-// - 3 first letters of name in the highScore
+// - 10 good matches = chrono gets faster
 // - add trap for color blinds
 // - add a gauge
 
@@ -37,7 +36,7 @@ export const start = () => {
     if (remainingTime <= 0) {
       endGame()
     } else {
-      timerDiv.innerHTML = (remainingTime / 1000).toFixed(3) + ' S';
+      timerDiv.innerHTML = '⏰ ' + (remainingTime / 1000).toFixed(3) + ' S';
       if (playerData.lives <= 0) {
         endGame()
       }

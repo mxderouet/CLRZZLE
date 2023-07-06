@@ -25,7 +25,7 @@ export function updateScore (guessedColor, matcherColor) {
     logColors(guessedColor, matcherColor)
     const correctAnswer = guessedColor === matcherColor;
     correctAnswer ? playerWon() : playerLost()
-    scoreTab.innerText = `${playerData.score} pts`;
+    scoreTab.innerText = `🏆 ${playerData.score} pts`;
     if (isGameOver()) { 
         endGame(playerData.score);
         startGameOver();

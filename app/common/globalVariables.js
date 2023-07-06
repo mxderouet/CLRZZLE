@@ -47,4 +47,4 @@ function checkGameOver() {
 
 export function isGameOver() {
     return checkGameOver();
-}
+} 

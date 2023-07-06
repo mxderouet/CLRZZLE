@@ -16,10 +16,8 @@ export function loadAssets (matcherDiv, score, lives) {
 
     const livesIcon = lives > 0 ? Array(lives).fill(heart).concat(Array(3 - lives).fill(skull)).join(' ') : Array(3).fill(skull).join(' ');
 
-    // const heartIcons = Array(lives).fill('&#x2665;').join(' ');
-
-    scoreTab.innerText = `${score} pts`
-    lifeTab.innerHTML = livesIcon;
+    scoreTab.innerText = `🏆 ${score} pts`
+    lifeTab.innerHTML = `${livesIcon}`;
 
     const symbols = pickSymbols()
 
