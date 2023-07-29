@@ -220,4 +220,14 @@ h1 {
     width: 50%; /* Adjust the width to your desired value */
     height: 100px;
     display: inline-block;
-  }
+}
+
+#confetti-canvas {
+  position: fixed; 
+  z-index: 999; 
+  top: 0; 
+  left: 0; 
+  width: 100vw; 
+  height: 100vh; 
+  pointer-events: none;
+}
